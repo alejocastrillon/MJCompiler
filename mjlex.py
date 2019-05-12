@@ -89,14 +89,17 @@ t_DOT = r'\.'
 t_SEMICOLON = r';'
 t_ADDITION = '\+'
 
+#Reconocimiento de un numero de tipo flotante
 def t_FLOAT(t):
     r'(-)?(\d+\.\d+)'
     return t
     
+#Reconocimiento de un numero en notación cientifica
 def t_CIENTIFIC(t):
     r'[+\-]?(?:0|[1-9]\d*)(?:\.\d*)?(\s)?[eE](?:[+\-]?\d+)?'
     return t
 
+#Reconocimiento de un numero binario
 def t_BINARY(t):
     r'b\'[01]+\''
     t.value  = t.value[2:]
@@ -108,6 +111,7 @@ def t_BINARY(t):
         t.value = 0
     return t
 
+#Reconocimiento de un numero hexadecimal
 def t_HEXADEC(t):
     r'0[Xx][0-9a-fA-F]+'
     try:
@@ -117,19 +121,23 @@ def t_HEXADEC(t):
         t.value = 0
     return t
 
+#Reconicimiento de una cadena de texto
 def t_STRING(t):
     r'\"( ([ -~]|(\\\"))+ )\"'
     return t
 
+#Ignora lo que hay despues de los caracteres //  ya que los reconoce como comentario
 def t_ignore_LINECOMMENT(t):
     r'//(.)*(\n)?'
 
+#Ignora lo que hay dentro de la secuencias de caracteres /* y */ ya que estos son comentarios multilineas
 def t_ignore_MULTILINECOMMENT(t):
     r'(/\*)(.|\n|\r)*(\*\/)'
 
 # A string containing ignored characters (spaces and tabs)
 t_ignore  = ' \t'
 
+#Reconoce la declaración de una variable o nombre de clase
 def t_IDEN(t):
     r'[_a-zA-Z_]([a-zA-Z_0-9]*[a-zA-Z])?'
     t.value = accentReplace(t.value)
@@ -138,11 +146,12 @@ def t_IDEN(t):
         t.value = t.value[:20]
     return t
 
-# Define a rule so we can track line numbers
+#Reconoce un salto de lina
 def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
 
+#Reconoce un numero
 def t_NUMBER(t):
     r'\d+'
     t.value = int(t.value)
