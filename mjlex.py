@@ -157,13 +157,13 @@ def t_NUMBER(t):
     t.value = int(t.value)
     return t
 
-# Error handling rule
+#Detector de errores lexicos
 def t_error(t):
     line = t.lexer.lineno
     print("Caracter %s no reconocido en la linea %d" % (t.value[0], line))
     t.lexer.skip(1)
 
-## Helper Functions ##
+#Funciones de ayuda
 def accentReplace(word):
     identifier = ''
     for i in word:
@@ -174,10 +174,8 @@ def accentReplace(word):
             identifier += i
     return identifier
 
-# Build the lexer
 lexer = lex.lex()
 
-# Test it out
 data = '''
 //
 class Test {
@@ -208,12 +206,11 @@ quicksort(a, mid+1, high);
 }
 '''
 
-# Give the lexer some input
+#Da la entrada al analizador lexico
 lexer.input(data)
 
-# Tokenize
 while True:
  tok = lexer.token()
  if not tok: 
-     break      # No more input
+     break     
  print(tok)
