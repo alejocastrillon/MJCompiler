@@ -1,5 +1,6 @@
 # -*- coding: cp1252 -*-
 import ply.lex as lex
+import codecs
 CONST_SPECIAL_CHARACTERS = u'\xf1\xe1\xe9\xed\xf3\xfa\xc1\xc9\xcd\xd3\xda\xd1'
 
 reserved = {
@@ -90,13 +91,13 @@ t_SEMICOLON = r';'
 t_ADDITION = '\+'
 
 #Reconocimiento de un numero de tipo flotante
-def t_FLOAT(t):
+""" def t_FLOAT(t):
     r'(-)?(\d+\.\d+)'
-    return t
+    return t """
     
 #Reconocimiento de un numero en notación cientifica
 def t_CIENTIFIC(t):
-    r'[+\-]?(?:0|[1-9]\d*)(?:\.\d*)?(\s)?[eE](?:[+\-]?\d+)?'
+    r'[\+\-]?(?:0|[1-9]\d*)(?:\.\d*)?(\s)?[eE](?:[+\-]?\d+)?'
     return t
 
 #Reconocimiento de un numero binario
@@ -174,37 +175,13 @@ def accentReplace(word):
             identifier += i
     return identifier
 
+directorio = "numbers.mj"
+fp = codecs.open(directorio, "r", "utf-8")
+data = fp.read()
+fp.close()
 lexer = lex.lex()
 
-data = '''
-//
-class Test {
-int partition(int [] a, int low, int high) {
-int pivot = a[low];
-int i = low;
-int j = high;
-int tmp;
-while (true) {
-while (a[i] < pivot) i = i+1;
-while (a[j] > pivot) j = j-1;
-if (i >= j) break;
-tmp = a[i];
-a[i] = a[j];
-a[j] = tmp;
-i = i + 1;
-j = j - 1;
-}
-return j;
-}
-void quicksort(int [] a, int low, int high) {
-if (low < high) {
-int mid = partition(a, low, high);
-quicksort(a, low, mid);
-quicksort(a, mid+1, high);
-}
-}
-}
-'''
+
 
 #Da la entrada al analizador lexico
 lexer.input(data)
@@ -214,3 +191,4 @@ while True:
  if not tok: 
      break     
  print(tok)
+

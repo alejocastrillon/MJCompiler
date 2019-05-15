@@ -1,0 +1,14 @@
+int numbercientific = 4E10;
+int another = 4;
+int anothercientific = 55.33E-10;
+binary numberbinary = b'0100010010';
+int hexadecimal = 0xA6B76;
+binary number = b'01';
+//Hola
+/*Bienvenido
+
+Bienvenido
+
+welcome*/
+
+a = 4;
