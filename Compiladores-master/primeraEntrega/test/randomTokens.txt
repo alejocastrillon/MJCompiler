@@ -1,0 +1,36 @@
+2+5*4=22
+velocidad
+distancia
+tiempo
+velocidad=distancia/tiempo
+//la velocidad es que tan rapido me muevo respecto a un punto de referencia
+0x04F
+0X0ABC
+-45
+/*el
+martes
+12 de septiembre
+a las 6:30
+tenemos el primer parcial de la materia*/
+"comentario sin terminar
+énsayo
+while true:
+if(a>b):
+a++
+la casa de christian4
+elsex
+whileelseif
+b’11111111’
+9998888888888888888888888
+-1.43E2
+"la temperatura es de
+/*package estructurasDeDatos.estructuraListasEnlazadas;
+
+import estructurasDeDatos.estructuraCola.NodoPersona;
+
+public class ListaSimple {
+    public NodoPersona cabeza;
+    public NodoPersona cola;
+    public NodoPersona actual;*/
+
+/*aassddf

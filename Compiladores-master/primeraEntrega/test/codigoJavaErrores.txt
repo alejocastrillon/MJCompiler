@@ -1,0 +1,112 @@
+/*fecha:10 de marzo de 2017
+Descripcion: Creacion de la clase lista simple
+la cual es una lista enlazada de nodos con una persona adentro*/
+
+package estructurasDeDatos.estructuraListasEnlazadas;
+
+import estructurasDeDatos.estructuraCola.NodoPersona;
+
+public class ListaSimple {
+    public NodoPersona cabeza;
+    public NodoPersona cola;
+    public NodoPersona actual;
+    
+    //***********************
+    public void crearLista(){
+        if(this.cabeza==null){
+            this.cabeza=this.cola=this.actual=new NodoPersona();
+            this.cabeza=this.cola=this.actual=null;
+        }
+    }
+   //*****************************
+    public void listarElementos(){
+        //Creo un nodo auxiliar para recorrer la lista
+        NodoPersona recorrido= new NodoPersona();
+        recorrido=this.cabeza;
+        //mientras no llegue al fin voy recorriendo nodo por nodo
+        //e imprimo los datos de la persona que esta en ese nodo
+        while(recorrido!=null){
+            System.out.printf("Nombre: %s\n,recorrido.getPersona().getNombre());
+            System.out.printf("Cedula: %d\n",recorrido.getPersona().getCedula());
+            System.out.printf("Direccion: %s\n",recorrido.getPersona().getDireccion());
+            System.out.printf("Telefono: %s\n",recorrido.getPersona().getTelefono());
+            recorrido=recorrido.getSiguiente();
+        }
+    }
+   //*************************************
+   public boolean buscarElemento(int cedula){
+       //Creo un nodo auxiliar para recorrer la lista
+       NodoPersona recorrido= new NodoPersona();
+       recorrido=this.cabeza;
+       //mientras no llegue al fin voy recorriendo nodo por nodo
+       while(recorrido!=null){
+           if(recorrido.getPersona().getCedula()==cedula){
+           System.out.printf("Cedula encontrada!!! pertenece a la persona %s\n",recorrido.getPersona().getNombre());
+           //ya encontre la cedula, entonces destruyo a actual.
+           recorrido=null;
+           return true;
+           }
+           recorrido=recorrido.getSiguiente();
+       }
+        return false;
+   }
+   //**********************************************************************************************
+   public void insertarAlInicio(String nombre,int cedula, String direccion, String telefono){
+       NodoPersona nodoNuevo = new NodoPersona();
+       
+       nodoNuevo.crearPersona(nombre, cedula, direccion, telefono);
+       //antes la lista [cabeza]-->[etc]-->[etc]-->[cola]-->null
+       //ahora [nodoNuevo]-->[cabeza vieja]-->[etc]-->[etc]-->[cola]-->null
+       nodoNuevo.setSiguiente(this.cabeza);
+       this.cabeza=nodoNuevo;
+   }
+   //*******************************************************************************************
+   public void insertarAlFinal(String nombre,int cedula, String direccion, String telefono){
+       NodoPersona nodoNuevo=new NodoPersona();
+       
+       nodoNuevo.crearPersona(nombre, cedula, direccion, telefono);
+       //antes la lista [cabeza]-->[etc]-->[etc]-->[cola]-->null
+       //ahora [cabeza]-->[etc]-->[etc]-->[cola vieja]-->[nodoNuevo]-->null
+       this.cola.setSiguiente(nodoNuevo);
+       nodoNuevo.setSiguiente(null);
+       this.cola=nodoNuevo;
+   }
+   //
+   public boolean borrarElemento(int cedula){
+       //Creo un nodo auxiliar para recorrer la lista
+       NodoPersona recorrido=new NodoPersona();
+       //Creo un nodo auxiliar para llevar registro del nodo anterior
+       NodoPersona anterior=new NodoPersona();
+       recorrido=this.cabeza;
+       anterior=null;
+       //mientras no llegue al fin voy recorriendo nodo por nodo
+       while(recorrido!=null){
+           if(recorrido.getPersona().getCedula()==cedula){
+               System.out.printf("cedula encontrada!!\n");
+               System.out.printf("la cedula pertenece a la persona %s\n",recorrido.getPersona().getNombre());
+               System.out.printf("procediendo a eliminar el registro\n");
+               //Cuando el nodo a borrar es la cabeza
+               if(anterior==null){
+                   this.cabeza.setSiguiente(null);
+                   this.cabeza=recorrido.getSiguiente();                   
+                }
+               //Cuando el nodo a borrar es la cola
+               else if(recorrido.getSiguiente()==null){
+                   anterior.setSiguiente(null);
+                   this.cola=anterior;
+                }
+               //Cuando el nodo a borrar esta en la mitad
+               else {
+                   anterior.setSiguiente(recorrido.getSiguiente());
+                   recorrido.setSiguiente(null);
+               }               
+               recorrido=anterior=null;
+               return true;
+           }
+       /*anterior=recorrido;
+       recorrido=recorrido.getSiguiente();
+       }
+       //Si recorrio toda la lista y no encontro el registro a eliminar
+       return false;
+   }  
+}

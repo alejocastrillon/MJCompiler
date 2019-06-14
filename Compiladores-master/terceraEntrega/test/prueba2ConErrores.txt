@@ -1,0 +1,15 @@
+class Empleado extends Persona{
+  int edad;
+  int nombre;
+  int altura;
+  
+  class Empleado(int edad, int nombre, int altura){
+    this.edad = edad;
+    this.nombre = nombre;
+    this.altura = altura;
+  
+  }
+
+
+
+}

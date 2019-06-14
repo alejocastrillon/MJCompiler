@@ -1,0 +1,115 @@
+
+
+Unused terminals:
+
+
+Grammar
+
+Rule 1     DECL -> TYPE VAR_LIST
+Rule 2     TYPE -> int
+Rule 3     TYPE -> float
+Rule 4     VAR_LIST -> id , VAR_LIST
+Rule 5     VAR_LIST -> id
+
+Terminals, with rules where they appear
+
+,                    : 4
+error                : 
+float                : 3
+id                   : 4 5
+int                  : 2
+
+Nonterminals, with rules where they appear
+
+DECL                 : 0
+TYPE                 : 1
+VAR_LIST             : 1 4
+
+
+Parsing method: SLR
+
+
+state 0
+
+    (0) S' -> . DECL
+    (1) DECL -> . TYPE VAR_LIST
+    (2) TYPE -> . int
+    (3) TYPE -> . float
+
+    int             shift and go to state 2
+    float           shift and go to state 3
+
+
+    DECL                           shift and go to state 1
+    TYPE                           shift and go to state 4
+
+state 1
+
+    (0) S' -> DECL .
+
+
+
+
+state 2
+
+    (2) TYPE -> int .
+
+    id              reduce using rule 2 (TYPE -> int .)
+
+
+
+state 3
+
+    (3) TYPE -> float .
+
+    id              reduce using rule 3 (TYPE -> float .)
+
+
+
+state 4
+
+    (1) DECL -> TYPE . VAR_LIST
+    (4) VAR_LIST -> . id , VAR_LIST
+    (5) VAR_LIST -> . id
+
+    id              shift and go to state 6
+
+
+    VAR_LIST                       shift and go to state 5
+
+state 5
+
+    (1) DECL -> TYPE VAR_LIST .
+
+    $end            reduce using rule 1 (DECL -> TYPE VAR_LIST .)
+
+
+
+state 6
+
+    (4) VAR_LIST -> id . , VAR_LIST
+    (5) VAR_LIST -> id .
+
+    ,               shift and go to state 7
+    $end            reduce using rule 5 (VAR_LIST -> id .)
+
+
+
+state 7
+
+    (4) VAR_LIST -> id , . VAR_LIST
+    (4) VAR_LIST -> . id , VAR_LIST
+    (5) VAR_LIST -> . id
+
+    id              shift and go to state 6
+
+
+    VAR_LIST                       shift and go to state 8
+
+state 8
+
+    (4) VAR_LIST -> id , VAR_LIST .
+
+    $end            reduce using rule 4 (VAR_LIST -> id , VAR_LIST .)
+
+

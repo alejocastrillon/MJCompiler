@@ -1,0 +1,24 @@
+class ClaseA{
+   cadena b;
+   integer getB(){
+  	  int uno = 1;
+  	  return uno;
+
+  }
+}
+
+class ClaseB{
+  string bc;
+   integer getC(){
+  	campo dos = 2;
+  	return dos;
+  }
+}
+
+class ClaseC{
+  int variable;
+  integer getB(){
+  	campo tres = 3;
+  	return 3;
+  }
+}

@@ -1,0 +1,28 @@
+class Test {
+  int partition(int [] a, int low, int high) {
+    int pivot = a[low];
+    int i = low;
+    int j = high;
+    int tmp;
+
+    while (true) {
+      while (a[i] < pivot) i = i+1;
+      while (a[j] > pivot) j = j-1;
+      if (i >= j) break;
+      tmp = a[i];
+      a[i] = a[j];
+      a[j] = tmp;
+      i = i + 1;
+      j = j - 1;
+    }
+    return j;
+  }
+
+  void quicksort(int [] a, int low, int high) {
+    if (low < high) {
+      int mid = partition(a, low, high);
+      quicksort(a, low, mid);
+      quicksort(a, mid+1, high);
+    }
+  }
+}
